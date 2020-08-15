@@ -1,6 +1,9 @@
 # LC-Writeup
 # Problem: Uncrossed Lines, https://leetcode.com/problems/uncrossed-lines/
 
+We would like you to pick any one approach to solve that problem and write about it. You writeup should include beginner-friendly intuition for your algorithm as well as code for it in Python, Java, or C++, whichever you’re most comfortable in. Please also include a detailed runtime and space complexity analysis of your approach. 
+
+
 # Approach: Top-Down Dynamic Programming
 
 # Intuition:
