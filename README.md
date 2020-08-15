@@ -14,14 +14,15 @@ If the subarrays share the same last digit (A[i] == B[j]), then there exists a l
 Otherwise, the subarrays have different last digits (A[i] != B[j]) and there isn't such a line. Then our answer is max(A[0...i-1],B
 
 # Algorithm:
-Let the array dp[i][j] store the maximum number of uncrossed lines of subarrays A[0...i] and B[0...j]. 
+Let the array ```dp[i][j]``` store the maximum number of uncrossed lines of subarrays A[0...i] and B[0...j]. 
 
 If A[i] == B[j]:
   dp[i][j] = dp[i-1][j-1] + 1
 Else:
   dp[i][j] = max(dp[i][j-1], dp[i-1][j])
 
-Code:
+# Code:
+
 
 
 # Complexity Analysis
