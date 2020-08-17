@@ -1,0 +1,21 @@
+from functools import lru_cache
+
+class Solution:
+    def maxUncrossedLines(self, A: List[int], B: List[int]) -> int:
+        # use dp bc there is no direct smart way to do this
+        
+        @lru_cache(maxsize=None)
+        def dp(i,j):
+            nonlocal A,B
+            if i==0 or j==0:
+                return 0
+            
+            # then it must be optimized by including it (no intersections here)
+            if A[i-1]==B[j-1]:
+                ans = 1 + dp(i-1,j-1)
+            else:
+                ans = max(dp(i-1,j),dp(i,j-1))
+
+            return ans
+        
+        return dp(len(A),len(B))

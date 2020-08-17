@@ -1,31 +1,40 @@
 # LC-Writeup
 # Problem: Uncrossed Lines, https://leetcode.com/problems/uncrossed-lines/
 
-We would like you to pick any one approach to solve that problem and write about it. You writeup should include beginner-friendly intuition for your algorithm as well as code for it in Python, Java, or C++, whichever you’re most comfortable in. Please also include a detailed runtime and space complexity analysis of your approach. 
-
-
 # Approach: Top-Down Dynamic Programming
 
 # Intuition:
-Let A and B be our two integer arrays. Suppose we want to find the maximum number of uncrossed lines of the subarrays A[0...i] and B[0...j].
+Let ```A``` and ```B``` be our two integer arrays. Suppose we want to find the maximum number of uncrossed lines in the subarrays ```A[0…i]``` and ```B[0...j]``` (inclusive on both ends).
 
-If the subarrays share the same last digit (A[i] == B[j]), then there exists a line connecting A[i] and B[j]. Because A[i] and B[j] belong at the same ends of the subarrays, the line connecting them won't intersect with any other lines. Then, we keep track of this line and look at the remaining subarrays A[0...i-1] and B[0...j-1].
+If the subarrays share the same last digit (```A[i] == B[j]```), then there exists a line connecting ```A[i]``` and ```B[j]```. Since ```A[i]``` and ```B[j]``` belong at the ends of the subarrays, this line connecting them won't intersect with any other lines. Therefore, we can draw in this line and look at the remaining subarrays ```A[0...i-1]``` and ```B[0...j-1]```.
 
-Otherwise, the subarrays have different last digits (A[i] != B[j]) and there isn't such a line. Then our answer is max(A[0...i-1],B
+[Insert Image]
+
+Otherwise, the subarrays have different last digits (```A[i] != B[j]```). Then at least one of the ends of the subarrays does not belong to a line (If both of them had lines, they would intersect). This motivates us to look at the subarrays with one of the ends removed (```A[0…i-1], B[0…j]``` or ```A[0…i], B[0…j-1]```). Then, the answer is equal to whichever pair of subarrays generates the most uncrossed lines.
+
+[Insert Image]
 
 # Algorithm:
-Let the array ```dp[i][j]``` store the maximum number of uncrossed lines of subarrays A[0...i] and B[0...j]. 
+Let ```rec(i,j)``` be the function that computes the max number of uncrossed lines in the subarrays ```A[0…i]``` and ```B[0...j]```.
 
+Base Case: 
+When one or more of the subarrays are empty (when ``` i == -1``` or ``` j == -1```). 
+
+Recursive Step:
+
+```
 If A[i] == B[j]:
-  dp[i][j] = dp[i-1][j-1] + 1
+  rec(i,j) = rec(i-1,j-1) + 1
 Else:
-  dp[i][j] = max(dp[i][j-1], dp[i-1][j])
+  rec(i,j) = max( rec(i,j-1), rec(i-1,j) )
+```
+
+To save on runtime, create a map ```dp``` that maps the tuple ```(i,j)``` to ```rec(i,j)```. This lets us access previously computed values in O(1) without having to repeatedly recompute the same results.
 
 # Code:
-
+See code.py
 
 
 # Complexity Analysis
-Our array dp is of length 
-- Time Complexity: O(AB) 
-- Space Complexity: O(AB) since we store every combination of letters of A with letters of B
+- Time Complexity: ```O(AB)``` since every pair ```(i,j)``` is computed at most once. Computation takes ```O(1)``` but there are 
+- Space Complexity: ```O(AB)``` since our map ```dp``` can store a maximum of |A||B| tuples.
