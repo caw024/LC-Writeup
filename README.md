@@ -4,7 +4,7 @@
 # Approach: Top-Down Dynamic Programming
 
 # Intuition:
-Let ```A``` and ```B``` be our two integer arrays. Suppose we want to find the maximum number of uncrossed lines in the subarrays ```A[0…i]``` and ```B[0...j]``` (inclusive on both ends).
+Let ```A``` and ```B``` be our two integer arrays. Suppose we want to find the maximum number of uncrossed lines in the subarrays ```A[0...i]``` and ```B[0...j]``` (inclusive on both ends).
 
 If the subarrays share the same last digit (```A[i] == B[j]```), then there exists a line connecting ```A[i]``` and ```B[j]```. Since ```A[i]``` and ```B[j]``` belong at the ends of the subarrays, this line connecting them won't intersect with any other lines. Therefore, we can draw in this line and look at the remaining subarrays ```A[0...i-1]``` and ```B[0...j-1]```.
 
@@ -15,7 +15,7 @@ Otherwise, the subarrays have different last digits (```A[i] != B[j]```). Then a
 [Insert Image]
 
 # Algorithm:
-Let ```rec(i,j)``` be the function that computes the max number of uncrossed lines in the subarrays ```A[0…i]``` and ```B[0...j]```.
+Let ```rec(i,j)``` be the function that computes the max number of uncrossed lines in the subarrays ```A[0...i]``` and ```B[0...j]```.
 
 Base Case: 
 When one or more of the subarrays are empty (when ``` i == -1``` or ``` j == -1```). 
@@ -23,9 +23,9 @@ When one or more of the subarrays are empty (when ``` i == -1``` or ``` j == -1`
 Recursive Step:
 
 ```
-If A[i] == B[j]:
+if A[i] == B[j]:
   rec(i,j) = rec(i-1,j-1) + 1
-Else:
+else:
   rec(i,j) = max( rec(i,j-1), rec(i-1,j) )
 ```
 
