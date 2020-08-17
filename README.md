@@ -14,7 +14,7 @@ Otherwise, the subarrays have different last digits (```A[i] != B[j]```). Then a
 Let ```rec(i,j)``` be the function that computes the max number of uncrossed lines in the subarrays ```A[0...i]``` and ```B[0...j]```.
 
 Base Case: 
-When one or more of the subarrays are empty (when ``` i == -1``` or ``` j == -1```, then ```rec(i,j) = 0```). 
+When one or more of the subarrays are empty (if ``` i == -1``` or ``` j == -1```, then ```rec(i,j) = 0```). 
 
 Recursive Step:
 ```
@@ -24,11 +24,11 @@ else:
   rec(i,j) = max( rec(i,j-1), rec(i-1,j) )
 ```
 
-To save on runtime, create a map ```dp``` that maps the tuple ```(i,j)``` to ```rec(i,j)```. This lets us access previously computed values in ```O(1)``` time without having to repeatedly recompute the same results.
+To save on runtime, create a map ```dp``` that maps the tuple ```(i,j)``` to ```rec(i,j)```. This lets us access previously computed values in ```O(1)``` time without having to recompute the same results.
 
 # Code:
 See code.py
-
+ 
 # Complexity Analysis
-- Time Complexity: ```O(AB)``` since given  ```(i,j)``` is computed at most once. Computation takes ```O(1)``` but there are 
-- Space Complexity: ```O(AB)``` since our map ```dp``` can stores each pair ```(i,j)``` with ```0 <= i < len(A)``` and ```0 <= j < len(B)```.
+- Time Complexity: ```O(AB)``` since each ```rec(i,j)``` takes ```O(1)``` to compute given their corresponding previous values. At worst, we have to compute ```rec(i,j)``` for all pairs ```(i,j)``` such that ```0 <= i < len(A)``` and ```0 <= j < len(B)```.
+- Space Complexity: ```O(AB)``` since ```dp``` stores each pair ```(i,j)``` with ```0 <= i < len(A)``` and ```0 <= j < len(B)```.
