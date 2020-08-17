@@ -1,5 +1,5 @@
 # LC-Writeup
-# Problem: Uncrossed Lines, https://leetcode.com/problems/uncrossed-lines/
+Problem: Uncrossed Lines, https://leetcode.com/problems/uncrossed-lines/
 
 # Approach: Top-Down Dynamic Programming
 
@@ -28,7 +28,6 @@ To save on runtime, create a map ```dp``` that maps the tuple ```(i,j)``` to ```
 
 # Code:
 See code.py
-
 
 # Complexity Analysis
 - Time Complexity: ```O(AB)``` since every pair ```(i,j)``` is computed at most once. Computation takes ```O(1)``` but there are 
