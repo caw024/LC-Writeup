@@ -24,11 +24,11 @@ else:
   rec(i,j) = max( rec(i,j-1), rec(i-1,j) )
 ```
 
-To save on runtime, create a map ```dp``` that maps the tuple ```(i,j)``` to ```rec(i,j)```. This lets us access previously computed values in O(1) without having to repeatedly recompute the same results.
+To save on runtime, create a map ```dp``` that maps the tuple ```(i,j)``` to ```rec(i,j)```. This lets us access previously computed values in ```O(1)``` time without having to repeatedly recompute the same results.
 
 # Code:
 See code.py
 
 # Complexity Analysis
-- Time Complexity: ```O(AB)``` since every pair ```(i,j)``` is computed at most once. Computation takes ```O(1)``` but there are 
-- Space Complexity: ```O(AB)``` since our map ```dp``` can store a maximum of |A||B| tuples.
+- Time Complexity: ```O(AB)``` since given  ```(i,j)``` is computed at most once. Computation takes ```O(1)``` but there are 
+- Space Complexity: ```O(AB)``` since our map ```dp``` can stores each pair ```(i,j)``` with ```0 <= i < len(A)``` and ```0 <= j < len(B)```.
